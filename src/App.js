@@ -10,7 +10,9 @@ class App extends Component {
   constructor(props){ // constructor 초기화를 담당한다.
     super(props);
     this.state = {
+      mode:'read',
       subject:{title:'WEB', sub:'World wide web!'},
+      Welcome:{title:'Welcome', desc:'Hello, React!!'},
       contents:[
         {id:1, title:'HTML', desc:'HTML is for information'},
         {id:2, title:'CSS', desc:'CSS is for design'},
@@ -19,11 +21,20 @@ class App extends Component {
     }
   }
   render () {
+    var _title, _desc = null;
+
+    if(this.state.mode === 'Welcome'){
+      _title = this.state.Welcome.title;
+      _desc = this.state.Welcome.desc;
+    } else if(this.state.mode === 'read'){
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+    }
     return (
       <div className="App">
         <Subject title={this.state.subject.title} sub={this.state.subject.sub}></Subject>
         <Navigation data={this.state.contents}></Navigation>
-        <Article title="HTML" desc="HTML is HyperText Markup Language."></Article>
+        <Article title={_title} desc={_desc}></Article>
       </div>
     );
   }
