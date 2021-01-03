@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       mode:'read',
+      selected_content_id:2,
       subject:{title:'WEB', sub:'World wide web!'},
       Welcome:{title:'Welcome', desc:'Hello, React!!'},
       contents:[
@@ -27,8 +28,16 @@ class App extends Component {
       _title = this.state.Welcome.title;
       _desc = this.state.Welcome.desc;
     } else if(this.state.mode === 'read'){
-      _title = this.state.contents[0].title;
-      _desc = this.state.contents[0].desc;
+      var i = 0;
+      while(i< this.state.contents.length){
+        var data = this.state.contents[i];
+        if(data.id === this.state.selected_content_id){
+          _title = data.title;
+          _desc = data.desc;
+          break;
+        }
+        i = i + 1;
+      }
     }
     console.log('render', this);
 
@@ -42,25 +51,17 @@ class App extends Component {
           >
         </Subject>
         
-        {/* <header>
-          <h1><a href="/" onClick={function(e){
-
-            console.log('event in', this);
-            e.preventDefault();
-
-            return;
-            console.log(e);
-            e.preventDefault();
-            // this.state.mode= 'Welcome';
+        <Navigation
+          onChangePage={function(id){
             this.setState({
-              mode:'Welcome'
+              mode:'read',
+              selected_content_id:Number(id)
             });
-
-          }.bind(this)}>{this.state.subject.title}</a></h1>
-          <div>{this.state.subject.sub}</div>
-        </header> */}
-
-        <Navigation data={this.state.contents}></Navigation>
+          }.bind(this)} 
+          data={this.state.contents}
+          
+          >
+          </Navigation>
         <Article title={_title} desc={_desc}></Article>
       </div>
     );
