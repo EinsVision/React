@@ -30,12 +30,25 @@ class App extends Component {
       _title = this.state.contents[0].title;
       _desc = this.state.contents[0].desc;
     }
+    console.log('render', this);
+
     return (
       <div className="App">
-        {/* <Subject title={this.state.subject.title} sub={this.state.subject.sub}></Subject> */}
+        <Subject title={this.state.subject.title} 
+          sub={this.state.subject.sub}
+          onChangePage={function(){
+            this.setState({mode:'Welcome'});
+          }.bind(this)}
+          >
+        </Subject>
         
-        <header>
+        {/* <header>
           <h1><a href="/" onClick={function(e){
+
+            console.log('event in', this);
+            e.preventDefault();
+
+            return;
             console.log(e);
             e.preventDefault();
             // this.state.mode= 'Welcome';
@@ -45,7 +58,7 @@ class App extends Component {
 
           }.bind(this)}>{this.state.subject.title}</a></h1>
           <div>{this.state.subject.sub}</div>
-        </header>
+        </header> */}
 
         <Navigation data={this.state.contents}></Navigation>
         <Article title={_title} desc={_desc}></Article>
