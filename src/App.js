@@ -6,14 +6,17 @@ import React from 'react';
  { fav }
 */
 
-function Food({fav}){
+function Food({name, picture}){
   // console.log(props);
   return(
-    <h3> I like {fav}</h3>
+    <div>
+      <h3> I like {name}</h3>
+      <img src={picture} />
+    </div>
   ); 
 }
 
-const foodILike = [
+const foodILike = [ 
   {
     name: 'Kimchi',
     image: 'https://admin.cjrecipe.com:9007/images/theKitchen/PHON/0000001651/0000006094/0000001651.jpg'
@@ -24,15 +27,15 @@ const foodILike = [
   },
   {
     name: 'ramen',
-    image: 'https://www.newiki.net/wiki/%ED%8C%8C%EC%9D%BC:Instant_ramens_in_a_korean_supermarket.jpg'
+    image: 'https://mblogthumb-phinf.pstatic.net/MjAyMDA1MjZfNDMg/MDAxNTkwNDgxOTc1OTE1.rpezhYUxGHG0X6-dmVwuACnqm7AugH9CUjxEatcVNsAg.C27glH_kXPk5zTORLyjUbU_yjkGDEbmwZXjaq_xGltIg.JPEG.naverschool/%ED%98%B8%EB%A1%9C%EB%A1%9C%EB%A1%9D.jpg?type=w800'
   },
   {
-    name: 'Kimchi',
-    image: 'https://admin.cjrecipe.com:9007/images/theKitchen/PHON/0000001651/0000006094/0000001651.jpg'
+    name: 'chicken',
+    image: 'http://economychosun.com/query/upload/303/20190608214338_gubchoja.jpg'
   },
   {
-    name: 'Kimchi',
-    image: 'https://admin.cjrecipe.com:9007/images/theKitchen/PHON/0000001651/0000006094/0000001651.jpg'
+    name: 'Yookgejang',
+    image: 'http://image.gsshop.com/image/26/27/26278621_L1.jpg'
   },
   
 
@@ -42,27 +45,7 @@ const foodILike = [
 function App(){
   return (
   <div>
-    <p>Hello potatos</p>
-    <Food
-      fav='kimchi'
-      something={true}
-      papapapa={['hello',1,2,3,4,true]} 
-    />
-    <Food
-      fav='ramen'
-      something={true}
-      papapapa={['hello',1,2,3,4,true]} 
-    />
-    <Food
-      fav='snack'
-      something={true}
-      papapapa={['hello',1,2,3,4,true]} 
-    />
-    <Food
-      fav='rice'
-      something={true}
-      papapapa={['hello',1,2,3,4,true]} 
-    />
+    {foodILike.map(dish => <Food name={dish.name} picture={dish.image}/>)}
   </div>
   );
 }
