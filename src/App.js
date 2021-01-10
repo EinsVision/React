@@ -1,5 +1,7 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
 
 /*
  아래 두개는 같은 것이다.
@@ -7,6 +9,7 @@ import PropTypes from 'prop-types';
  { fav }
 */
 
+/*
 function Food({delicious, picture, rating}){
   // console.log(props);
   return(
@@ -17,13 +20,15 @@ function Food({delicious, picture, rating}){
     </div>
   ); 
 }
-
+*/
+/*
 Food.propTypes = {
   delicious: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired
 };
-
+*/ 
+/*
 const foodILike = [ 
   {
     id: 1,
@@ -56,10 +61,12 @@ const foodILike = [
     rating: 5.5,
   },
   
-
 ];
 
+*/
+
 // 방법 1
+/*
 function App(){
   return (
   <div>
@@ -71,7 +78,38 @@ function App(){
   </div>
   );
 }
+*/
 
+// Function component는 뭔가를 return해 그리고 screen에 표시돼, class component는 class야 하지만 
+// react component로 부터 확장되고 screen에 표시돼 그리고 render() method 안에 넣야야 한다.
+// 즉, React는 자동적으로 너의 class component의 render method를 실행해! 자동으로!
+// 방법 3 (State 는 object이고 component의 data를 넣을 공간이 있고 이 데이터는 변한다.)
+class App extends React.Component{
+  state={
+    count: 0
+  }
+
+  add = () => {
+    console.log('add');
+  };
+
+  minus = () => {
+    console.log('minus');
+  };
+
+  render(){
+    return (
+      <div>
+        <h1>The number is {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
+}
+
+
+export default App;
 
 // 방법 2
 // function renderFood(dish){
@@ -87,4 +125,4 @@ function App(){
 //   );
 // }
 
-export default App;
+
