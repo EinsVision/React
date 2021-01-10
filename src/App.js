@@ -91,10 +91,15 @@ class App extends React.Component{
 
   add = () => {
     console.log('add');
+    // this.state.count = 1;
+    this.setState(current => ({count: current.count + 1}));
   };
 
   minus = () => {
     console.log('minus');
+    this.setState(current => ({count: current.count - 1}));
+    // this.state.count = -1; // 이렇게하면 안되는 이유는 매번 state의 상태를 변경할 때 너는 react가 render function을 호출하지 않는다.
+    //  Do not mutate state directly. Use setState() 이러한 error를 발생시킨다.
   };
 
   render(){
