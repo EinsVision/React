@@ -85,6 +85,11 @@ function App(){
 // 즉, React는 자동적으로 너의 class component의 render method를 실행해! 자동으로!
 // 방법 3 (State 는 object이고 component의 data를 넣을 공간이 있고 이 데이터는 변한다.)
 class App extends React.Component{
+  constructor(props){
+    super(props);
+    console.log('hello constructor function');
+  }
+
   state={
     count: 0
   }
@@ -102,7 +107,16 @@ class App extends React.Component{
     //  Do not mutate state directly. Use setState() 이러한 error를 발생시킨다.
   };
 
+  componentDidMount(){ // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
+    console.log('component rendered'); 
+  }
+
+  componentDidUpdate(){
+    console.log('I just updated');
+  }
+
   render(){
+    console.log('render function');
     return (
       <div>
         <h1>The number is {this.state.count}</h1>
