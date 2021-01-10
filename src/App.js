@@ -2,6 +2,28 @@ import { render } from '@testing-library/react';
 import React from 'react';
 // import PropTypes from 'prop-types';
 
+class App extends React.Component{
+  state = {
+    isLoading: true,
+    movies: [],
+  };
+
+  componentDidMount(){
+    console.log('componentDidMount function');
+    setTimeout(() => {
+      this.setState({isLoading: false});
+    }, 2000);
+  }
+
+  render(){
+    console.log('render function');
+    const {isLoading} = this.state;
+    return (
+      <div>{this.state.isLoading ? 'Loading..' : 'We are ready'}</div>
+    );
+  }
+}
+
 
 /*
  아래 두개는 같은 것이다.
@@ -84,6 +106,7 @@ function App(){
 // react component로 부터 확장되고 screen에 표시돼 그리고 render() method 안에 넣야야 한다.
 // 즉, React는 자동적으로 너의 class component의 render method를 실행해! 자동으로!
 // 방법 3 (State 는 object이고 component의 data를 넣을 공간이 있고 이 데이터는 변한다.)
+/*
 class App extends React.Component{
   constructor(props){
     super(props);
@@ -106,7 +129,7 @@ class App extends React.Component{
     // this.state.count = -1; // 이렇게하면 안되는 이유는 매번 state의 상태를 변경할 때 너는 react가 render function을 호출하지 않는다.
     //  Do not mutate state directly. Use setState() 이러한 error를 발생시킨다.
   };
-
+  // mount는 생겨나는 것, 태어나는 것, 살아 있는 것
   componentDidMount(){ // 컴포넌트가 만들어지고 첫 렌더링을 다 마친 후 실행되는 메소드입니다.
     console.log('component rendered'); 
   }
@@ -126,7 +149,7 @@ class App extends React.Component{
     );
   }
 }
-
+*/
 
 export default App;
 
