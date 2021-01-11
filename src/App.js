@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 import React from 'react';
-// import PropTypes from 'prop-types';
+import axios from 'axios';
+import Movie from "./Movie";
 
 class App extends React.Component{
   state = {
@@ -8,22 +9,46 @@ class App extends React.Component{
     movies: [],
   };
 
-  componentDidMount(){
-    console.log('componentDidMount function');
-    setTimeout(() => {
-      this.setState({isLoading: false});
-    }, 2000);
+  getMovies = async () => {
+    const {
+      data:{
+        data: {movies}
+      }
+    } = await axios.get('https://yts.mx/api/v2/list_movies.json?sort_by=rating');
+    //console.log(movies.data.data.movies);
+    this.setState({movies, isLoading: false});
+  };
+
+  async componentDidMount(){
+    // console.log('componentDidMount function');
+    // setTimeout(() => {
+    //   this.setState({isLoading: false});
+    // }, 2000);
+    this.getMovies();
   }
 
   render(){
     console.log('render function');
-    const {isLoading} = this.state;
+    const {isLoading, movies} = this.state;
     return (
-      <div>{this.state.isLoading ? 'Loading..' : 'We are ready'}</div>
+      <div>{isLoading 
+            ? 'Loading..' 
+            : movies.map(movie => (
+            <Movie
+              id={movie.id} 
+              year={movie.year} 
+              title={movie.title} 
+              summary={movie.summary} 
+              poster={movie.medium_cover_image}
+            />
+            ) 
+          )}
+      </div>
     );
   }
 }
 
+export default App;
 
 /*
  아래 두개는 같은 것이다.
@@ -150,8 +175,6 @@ class App extends React.Component{
   }
 }
 */
-
-export default App;
 
 // 방법 2
 // function renderFood(dish){
