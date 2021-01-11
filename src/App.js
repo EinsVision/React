@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import Movie from "./Movie";
+import './App.css'
 
 class App extends React.Component{
   state = {
@@ -31,19 +32,28 @@ class App extends React.Component{
     console.log('render function');
     const {isLoading, movies} = this.state;
     return (
-      <div>{isLoading 
-            ? 'Loading..' 
-            : movies.map(movie => (
-            <Movie
-              id={movie.id} 
-              year={movie.year} 
-              title={movie.title} 
-              summary={movie.summary} 
-              poster={movie.medium_cover_image}
-            />
-            ) 
-          )}
-      </div>
+      <section className='container'>
+        {isLoading 
+              ? ( <div className='loader'>
+                  <span className='loader_text'>
+                    Loading...
+                  </span>
+                </div>
+            ) : 
+            <div className='movies'>
+            {movies.map(movie => (
+              <Movie
+                id={movie.id} 
+                year={movie.year} 
+                title={movie.title} 
+                summary={movie.summary} 
+                poster={movie.medium_cover_image}
+                genres={movie.genres}
+              />
+              ))}
+            </div>
+      }
+      </section>
     );
   }
 }
@@ -127,12 +137,12 @@ function App(){
 }
 */
 
-// Function component는 뭔가를 return해 그리고 screen에 표시돼, class component는 class야 하지만 
+// Function component는 뭔가를 return해 그리고 screen에 표시돼, className component는 className야 하지만 
 // react component로 부터 확장되고 screen에 표시돼 그리고 render() method 안에 넣야야 한다.
-// 즉, React는 자동적으로 너의 class component의 render method를 실행해! 자동으로!
+// 즉, React는 자동적으로 너의 className component의 render method를 실행해! 자동으로!
 // 방법 3 (State 는 object이고 component의 data를 넣을 공간이 있고 이 데이터는 변한다.)
 /*
-class App extends React.Component{
+className App extends React.Component{
   constructor(props){
     super(props);
     console.log('hello constructor function');
