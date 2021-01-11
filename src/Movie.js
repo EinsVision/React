@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import './Movie.css'
+
 
 function Movie({year, title, summary, poster, genres}){
     return (
@@ -14,7 +14,7 @@ function Movie({year, title, summary, poster, genres}){
                     <li key={index} className='genres_genre'>{genres}</li>
                 ))}
             </ul>
-            <p className='movie_summary'>{summary}</p>
+            <p className='movie_summary'>{summary.slice(0,140)}...</p>
         </div>
     </div>
     );
